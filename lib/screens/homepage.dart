@@ -50,57 +50,128 @@ class _HopmePageState extends State<HopmePage> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(left: 13, right: 8),
-            child: Container(
-              padding: const EdgeInsets.only(left: 8, right: 8),
-              height: 40,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: const Color(0xFFE5E5E5),
+  Widget _portraitMode() {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        ListView(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(left: 13, right: 8),
+              child: Container(
+                padding: const EdgeInsets.only(left: 8, right: 8),
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: const Color(0xFFE5E5E5),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(
+                      Icons.menu_rounded,
+                      color: Colors.black,
+                    ),
+                    Text('Portfolio', style: Styles.regularTextStyle),
+                    const Icon(
+                      Icons.share_rounded,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
               ),
+            ),
+            const Gap(5),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(left: 13),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Icon(
-                    Icons.menu_rounded,
-                    color: Colors.black,
-                  ),
-                  Text('Portfolio', style: Styles.regularTextStyle),
-                  const Icon(
-                    Icons.share_rounded,
-                    color: Colors.black,
-                  ),
+                  CustomTag('About Me', 0),
+                  const Gap(5),
+                  CustomTag('Experience', 1),
+                  const Gap(5),
+                  CustomTag('Services', 2),
+                  const Gap(5),
+                  CustomTag('Contact Me', 3),
                 ],
               ),
             ),
-          ),
-          const Gap(5),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.only(left: 13),
-            child: Row(
-              children: [
-                CustomTag('About Me', 0),
-                const Gap(5),
-                CustomTag('Experience', 1),
-                const Gap(5),
-                CustomTag('Services', 2),
-                const Gap(5),
-                CustomTag('Contact Me', 3),
-              ],
-            ),
-          ),
-          Center(
-            child: _widgetOptions[_selectedIndex],
-          )
-        ],
-      ),
+            Center(
+              child: _widgetOptions[_selectedIndex],
+            )
+          ],
+        ),
+      ],
     );
+  }
+
+  Widget _landScapeMode() {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        ListView(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(left: 13, right: 8),
+              child: Container(
+                padding: const EdgeInsets.only(left: 8, right: 8),
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: const Color(0xFFE5E5E5),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(
+                      Icons.menu_rounded,
+                      color: Colors.black,
+                    ),
+                    Text('Portfolio', style: Styles.regularTextStyle),
+                    const Icon(
+                      Icons.share_rounded,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const Gap(5),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(left: 13),
+              child: Row(
+                children: [
+                  CustomTag('About Me', 0),
+                  const Gap(5),
+                  CustomTag('Experience', 1),
+                  const Gap(5),
+                  CustomTag('Services', 2),
+                  const Gap(5),
+                  CustomTag('Contact Me', 3),
+                ],
+              ),
+            ),
+            Center(
+              child: _widgetOptions[_selectedIndex],
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: OrientationBuilder(
+      builder: (BuildContext context, Orientation orientation) {
+        if (orientation == Orientation.portrait) {
+          return _portraitMode();
+        } else {
+          return _landScapeMode();
+        }
+      },
+    ));
   }
 }
