@@ -1,9 +1,9 @@
-import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:resume_app/utils/app_styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactMe extends StatelessWidget {
   const ContactMe({super.key});
@@ -132,21 +132,25 @@ class ContactMe extends StatelessWidget {
                   ),
                   const Gap(15),
                   Row(
-                    children: const [
+                    children: [
                       SocialMediaLink(
-                        myicon: AssetImage("images/github.png"),
+                        myicon: const AssetImage("images/github.png"),
+                        sUrl: Uri.parse('https://github.com/lawalazeez'),
                       ),
-                      Gap(10),
+                      const Gap(10),
                       SocialMediaLink(
-                        myicon: AssetImage("images/facebook.png"),
+                        myicon: const AssetImage("images/facebook.png"),
+                        sUrl: Uri.parse('https://github.com/lawalazeez'),
                       ),
-                      Gap(10),
+                      const Gap(10),
                       SocialMediaLink(
-                        myicon: AssetImage("images/linkedin.png"),
+                        myicon: const AssetImage("images/linkedin.png"),
+                        sUrl: Uri.parse('https://github.com/lawalazeez'),
                       ),
-                      Gap(10),
+                      const Gap(10),
                       SocialMediaLink(
-                        myicon: AssetImage("images/twitter.png"),
+                        myicon: const AssetImage("images/twitter.png"),
+                        sUrl: Uri.parse('https://github.com/lawalazeez'),
                       ),
                     ],
                   )
@@ -162,7 +166,8 @@ class ContactMe extends StatelessWidget {
 
 class SocialMediaLink extends StatelessWidget {
   final AssetImage myicon;
-  const SocialMediaLink({required this.myicon});
+  final Uri sUrl;
+  const SocialMediaLink({required this.myicon, required this.sUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -180,9 +185,17 @@ class SocialMediaLink extends StatelessWidget {
             size: 25,
           ),
           color: Colors.white,
-          onPressed: () {},
+          onPressed: _launchURL,
         ),
       ),
     );
+  }
+
+  _launchURL() async {
+    if (await canLaunchUrl(sUrl)) {
+      await launchUrl(sUrl, mode: LaunchMode.platformDefault);
+    } else {
+      throw 'Could not launch $sUrl';
+    }
   }
 }
