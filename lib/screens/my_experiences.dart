@@ -10,21 +10,21 @@ class MyExperience extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).backgroundColor,
       child: Center(
         child: Container(
-          color: Colors.white,
+          color: Theme.of(context).backgroundColor,
           margin: const EdgeInsets.only(
             left: 13,
             right: 8,
           ),
           child: Container(
             //color: Colors.white,
-            height: 400,
-            width: 359,
+            height: Styles.checkOrientation(context) ? 700 : 350,
+            width: Styles.checkOrientation(context) ? 359 : 750,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Styles.bgColor,
+              color: Theme.of(context).cardColor,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -34,7 +34,8 @@ class MyExperience extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.only(top: 20),
                     child: DefaultTextStyle(
-                      style: Styles.semiBoldTextStyle,
+                      style: Styles.semiBoldTextStyle
+                          .copyWith(color: Theme.of(context).primaryColor),
                       child: const Text(
                         'Work Experience',
                       ),
@@ -45,25 +46,27 @@ class MyExperience extends StatelessWidget {
                 expListTile(
                   positionHeld: 'Android Instructor',
                   companyName: 'Developer Student Club',
-                  duration: 'Sept 2019-October 2020- 1 year, funaab aveokuta',
+                  duration: 'Sept 2019-October 2020- 1 year, funaab abeokuta',
+                  workDescription:
+                      'Taught beginner classes in android development using java',
+                ),
+                const Gap(15),
+                expListTile(
+                  positionHeld: 'Android Instructor',
+                  companyName: 'Grazac Academy Limited',
+                  duration:
+                      'Feb 2019-May2020- 6 months, iyana Motuary abeokuta',
                   workDescription:
                       'Taught beginner classes in android development using kotlin',
                 ),
                 const Gap(15),
                 expListTile(
-                  positionHeld: 'Android Instructor',
-                  companyName: 'Developer Student Club',
-                  duration: 'Sept 2019-October 2020- 1 year, funaab aveokuta',
+                  positionHeld: 'Intern',
+                  companyName: 'IHS Towers Limited ',
+                  duration:
+                      'Febuary 2022-September 2020- 6 months, Victoria Island Lagos',
                   workDescription:
-                      'Taught beginner classes in android development using kotlin',
-                ),
-                const Gap(15),
-                expListTile(
-                  positionHeld: 'Android Instructor',
-                  companyName: 'Developer Student Club',
-                  duration: 'Sept 2019-October 2020- 1 year, funaab aveokuta',
-                  workDescription:
-                      'Taught beginner classes in android development using kotlin',
+                      'Provided power support to the PMO Department',
                 ),
               ],
             ),
@@ -93,25 +96,33 @@ class expListTile extends StatelessWidget {
         isThreeLine: true,
         title: Text(
           positionHeld,
-          style: Styles.regularTextStyle
-              .copyWith(fontWeight: FontWeight.w600, fontSize: 14),
+          style: Styles.regularTextStyle.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+              color: Theme.of(context).primaryColor),
         ),
         subtitle: Column(
           children: [
             Text(
               companyName,
-              style: Styles.regularTextStyle
-                  .copyWith(fontWeight: FontWeight.w400, fontSize: 14),
+              style: Styles.regularTextStyle.copyWith(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                  color: Theme.of(context).primaryColor),
             ),
             Text(
               duration,
-              style: Styles.regularTextStyle
-                  .copyWith(fontSize: 13, fontWeight: FontWeight.normal),
+              style: Styles.regularTextStyle.copyWith(
+                  fontSize: 13,
+                  fontWeight: FontWeight.normal,
+                  color: Theme.of(context).primaryColor),
             ),
             Text(
               workDescription,
-              style: Styles.regularTextStyle
-                  .copyWith(fontSize: 13, fontWeight: FontWeight.normal),
+              style: Styles.regularTextStyle.copyWith(
+                  fontSize: 13,
+                  fontWeight: FontWeight.normal,
+                  color: Theme.of(context).primaryColor),
             ),
           ],
         ),

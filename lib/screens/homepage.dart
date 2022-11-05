@@ -1,9 +1,11 @@
 import 'dart:developer';
+import 'dart:ffi';
 import 'dart:ui';
 import 'package:resume_app/screens/landing_page.dart';
 import 'package:resume_app/screens/my_experiences.dart';
 import 'package:resume_app/screens/services.dart';
 import 'package:resume_app/screens/contact_me.dart';
+import 'package:resume_app/widgets/my_drawer.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +20,12 @@ class HopmePage extends StatefulWidget {
 }
 
 class _HopmePageState extends State<HopmePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   static final List<Widget> _widgetOptions = <Widget>[
     const LandingPage(),
     const MyExperience(),
-    const Text("Services"),
+    const Services(),
     const ContactMe(),
   ];
 
@@ -32,7 +36,8 @@ class _HopmePageState extends State<HopmePage> {
       height: 29,
       width: 110,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20), color: Colors.black),
+          borderRadius: BorderRadius.circular(20),
+          color: Theme.of(context).primaryColor),
       child: InkWell(
         onTap: () {
           setState(() {
@@ -43,7 +48,8 @@ class _HopmePageState extends State<HopmePage> {
           alignment: Alignment.center,
           child: Text(
             tagName,
-            style: const TextStyle(color: Colors.white),
+            style: Styles.BoWCardTextStyle.copyWith(
+                color: Theme.of(context).backgroundColor),
           ),
         ),
       ),
@@ -63,19 +69,26 @@ class _HopmePageState extends State<HopmePage> {
                 height: 40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  color: const Color(0xFFE5E5E5),
+                  color: Theme.of(context).cardColor,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(
-                      Icons.menu_rounded,
-                      color: Colors.black,
+                    InkWell(
+                      onTap: () => _scaffoldKey.currentState?.openDrawer(),
+                      child: Icon(
+                        Icons.menu_rounded,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
-                    Text('Portfolio', style: Styles.regularTextStyle),
-                    const Icon(
+                    Text(
+                      'Portfolio',
+                      style: Styles.regularTextStyle
+                          .copyWith(color: Theme.of(context).primaryColor),
+                    ),
+                    Icon(
                       Icons.share_rounded,
-                      color: Colors.black,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ],
                 ),
@@ -124,9 +137,12 @@ class _HopmePageState extends State<HopmePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(
-                      Icons.menu_rounded,
-                      color: Colors.black,
+                    InkWell(
+                      onTap: () => _scaffoldKey.currentState?.openDrawer(),
+                      child: const Icon(
+                        Icons.menu_rounded,
+                        color: Colors.black,
+                      ),
                     ),
                     Text('Portfolio', style: Styles.regularTextStyle),
                     const Icon(
@@ -164,14 +180,18 @@ class _HopmePageState extends State<HopmePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: OrientationBuilder(
-      builder: (BuildContext context, Orientation orientation) {
-        if (orientation == Orientation.portrait) {
-          return _portraitMode();
-        } else {
-          return _landScapeMode();
-        }
-      },
-    ));
+    return Scaffold(
+      key: _scaffoldKey,
+      drawer: const MyDrawer(),
+      body: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
+          if (orientation == Orientation.portrait) {
+            return _portraitMode();
+          } else {
+            return _landScapeMode();
+          }
+        },
+      ),
+    );
   }
 }
