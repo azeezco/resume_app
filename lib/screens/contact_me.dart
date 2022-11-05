@@ -1,5 +1,3 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:resume_app/utils/app_styles.dart';
@@ -11,24 +9,26 @@ class ContactMe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).backgroundColor,
       child: Center(
         child: Container(
-          color: Colors.white,
+          color: Theme.of(context).backgroundColor,
           margin: const EdgeInsets.only(left: 13, right: 10),
           child: Container(
             height: 600,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Styles.bgColor,
+              color: Theme.of(context).cardColor,
             ),
             child: Container(
               margin: const EdgeInsets.only(left: 25, right: 30, top: 20),
               child: Column(
                 children: [
+                  const Gap(30),
                   DefaultTextStyle(
-                    style: Styles.regularTextStyle
-                        .copyWith(fontWeight: FontWeight.w600),
+                    style: Styles.regularTextStyle.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).primaryColor),
                     child: const Text(
                       'If you have any Unique Idea for Project in your mind',
                       textAlign: TextAlign.center,
@@ -36,36 +36,37 @@ class ContactMe extends StatelessWidget {
                   ),
                   const Gap(30),
                   Material(
-                    color: Styles.bgColor,
+                    color: Theme.of(context).backgroundColor,
                     child: Container(
                       height: 29,
                       width: 133,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.black),
-                      child: const InkWell(
+                          color: Theme.of(context).primaryColor),
+                      child: InkWell(
                         child: Align(
                           alignment: Alignment.center,
                           child: Text(
                             'Contact Me',
-                            style: TextStyle(color: Colors.white),
+                            style: Styles.BoWCardTextStyle.copyWith(
+                                color: Theme.of(context).backgroundColor),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  const Gap(15),
+                  const Gap(30),
                   Row(
                     children: [
                       SizedBox(
                         height: 30,
                         width: 30,
                         child: Material(
-                          color: Styles.bgColor,
+                          color: Theme.of(context).backgroundColor,
                           child: Ink(
-                            decoration: const ShapeDecoration(
-                              color: Color(0xFF000000),
-                              shape: RoundedRectangleBorder(
+                            decoration: ShapeDecoration(
+                              color: Theme.of(context).primaryColor,
+                              shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
                                 Radius.circular(10),
                               )),
@@ -76,7 +77,7 @@ class ContactMe extends StatelessWidget {
                                 Icons.call_outlined,
                                 size: 15,
                               ),
-                              color: Colors.white,
+                              color: Theme.of(context).backgroundColor,
                               onPressed: () {},
                             ),
                           ),
@@ -84,7 +85,8 @@ class ContactMe extends StatelessWidget {
                       ),
                       const Gap(15),
                       DefaultTextStyle(
-                        style: Styles.regularTextStyle,
+                        style: Styles.regularTextStyle
+                            .copyWith(color: Theme.of(context).primaryColor),
                         child: const Text(
                           '+2348133715780',
                         ),
@@ -98,10 +100,10 @@ class ContactMe extends StatelessWidget {
                         height: 30,
                         width: 30,
                         child: Material(
-                          color: Styles.bgColor,
+                          color: Theme.of(context).cardColor,
                           child: Ink(
                             decoration: BoxDecoration(
-                              color: const Color(0xFF000000),
+                              color: Theme.of(context).primaryColor,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: IconButton(
@@ -110,7 +112,7 @@ class ContactMe extends StatelessWidget {
                                 Icons.mail_outlined,
                                 size: 15,
                               ),
-                              color: Colors.white,
+                              color: Theme.of(context).backgroundColor,
                               onPressed: () {},
                             ),
                           ),
@@ -118,39 +120,48 @@ class ContactMe extends StatelessWidget {
                       ),
                       const Gap(15),
                       DefaultTextStyle(
-                        style: Styles.regularTextStyle,
+                        style: Styles.regularTextStyle
+                            .copyWith(color: Theme.of(context).primaryColor),
                         child: const Text(
                           'Azeezco1@gamil.com',
                         ),
                       )
                     ],
                   ),
-                  const Gap(15),
+                  const Gap(50),
                   DefaultTextStyle(
-                    style: Styles.regularTextStyle,
-                    child: const Text('I make as soon as possible.'),
+                    style: Styles.regularTextStyle
+                        .copyWith(color: Theme.of(context).primaryColor),
+                    child: const Text(
+                      'I am open to collaboration on open source'
+                      ' project. I love exciting challenges and is open to '
+                      'suggestions. I work with little or no supervision, '
+                      'Let me be the guy to bring your ideas to life.',
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                  const Gap(15),
+                  const Gap(90),
                   Row(
                     children: [
                       SocialMediaLink(
                         myicon: const AssetImage("images/github.png"),
-                        sUrl: Uri.parse('https://github.com/lawalazeez'),
+                        sUrl: Uri.parse('https://github.com/azeezco'),
                       ),
                       const Gap(10),
                       SocialMediaLink(
                         myicon: const AssetImage("images/facebook.png"),
-                        sUrl: Uri.parse('https://github.com/lawalazeez'),
+                        sUrl: Uri.parse('https://facebook.com/azeezayotunde'),
                       ),
                       const Gap(10),
                       SocialMediaLink(
                         myicon: const AssetImage("images/linkedin.png"),
-                        sUrl: Uri.parse('https://github.com/lawalazeez'),
+                        sUrl:
+                            Uri.parse('https://www.linkedin.com/in/azeezlawal'),
                       ),
                       const Gap(10),
                       SocialMediaLink(
                         myicon: const AssetImage("images/twitter.png"),
-                        sUrl: Uri.parse('https://github.com/lawalazeez'),
+                        sUrl: Uri.parse('https://twitter.com/lawalazeez'),
                       ),
                     ],
                   )
@@ -172,10 +183,10 @@ class SocialMediaLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Styles.bgColor,
+      color: Theme.of(context).cardColor,
       child: Ink(
-        decoration: const ShapeDecoration(
-          color: Color(0xFF000000),
+        decoration: ShapeDecoration(
+          color: Theme.of(context).primaryColor,
           shape: CircleBorder(),
         ),
         child: IconButton(
@@ -184,7 +195,7 @@ class SocialMediaLink extends StatelessWidget {
             myicon,
             size: 25,
           ),
-          color: Colors.white,
+          color: Theme.of(context).backgroundColor,
           onPressed: _launchURL,
         ),
       ),
